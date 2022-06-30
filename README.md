@@ -4,7 +4,7 @@ This is a repo for cooperition between UX-designer Sophie and Web Dev Yuhui for 
 # Demo
 I will build our App step by step and start with demo-page to realize some of the prototype-pages.
 ## How to use
-copy the html page and open in VScode and run it in live serve/open it in Chrom Browser.
+copy the html page and js file and open in VScode and run it in live serve/open it in Chrom Browser.
 
 # User Story
 I am a teacher with 4 new classes, 120 new namecards in my library.
