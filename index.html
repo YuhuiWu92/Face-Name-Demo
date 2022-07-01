@@ -5,21 +5,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>index page</title>
-    <h1>Demos</h1>
-    <div>
-        <span>
-            <h2>search with name, gender and class
-                <a href="search-name.html" type="button">see demo</a>
-            </h2>
-           
-        </span>
-        <img src="img/searchname.png" alt="demo-img-search">
-        
-    </div>
-        
-    
+     <style>
+        a :hover{
+            color: blueviolet;
+            background-color: antiquewhite;
+        }
+        a {
+            color: brown;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+     </style>
 </head>
 <body>
-    
+    <h1>Demos</h1>
+    <ul>
+        <li>search with name, gender and class
+            <a href="search-name.html" type="button">see demo</a>
+            <img src="img/searchname.png" alt="demo-img-search" width="10%">
+        </li>
+        <li>use QR code in our app
+            <p>conclusion: 
+                1. it is possible to generate a QR code with after teacher finished with creating a group. 
+                2. And the teacher need to click a button 'generate to QR code' and then, a QR code will be generate.
+                3. how big the QR code should be, and the color usw. can be inplemented.
+            </p>
+            How to Generate QR Code Using Node.js <a href="https://www.section.io/engineering-education/how-to-generate-qr-codes-using-nodejs/">Tutorial</a>
+            a Github Library, which can be use and pack it in Vue envirment<a href="https://github.com/soldair/node-qrcode">Github repo</a>
+        </li>
+        <li>something may be instresting for you/or you may have tried:<a href="https://github.com/bernaferrari/FigmaToCode">Figma to code</a>
+            <p>I heard it first from AWS (amazon meeting), which use 
+                <a href="https://docs.amplify.aws/console/uibuilder/figmatocode/">Amplify</a>, which allowed to build apps as soon as possible.</p>
+                
+        </li>
+    </ul> 
 </body>
 </html>
