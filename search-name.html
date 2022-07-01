@@ -13,49 +13,64 @@
 <body>
 <!-- prepare a div -->
     <div id="root">
-        <h2>person list</h2> 
-        <span>
-            <img src="img/searchname.png" alt="demo-img-search" width="400" height="400">
-        </span>
-        <h5>Search with Name</h5>
-        <input type="text" placeholder="pleace input the name" v-model="keyword">
-      <ul>
-        <li v-for="person in FilPersonsName" :key="person.id">
+        <h2>Search bar & filter</h2> 
+        <img src="img/searchname.png" alt="demo-img-search" width="400" height="400">
+<!-- Search with Name,keyword inside the name -->        
+        <div>
+            <h5>Search with Name</h5>
+            <input type="text" placeholder="pleace input the name" v-model="keyword">
+            <ul>
+                <li v-for="person in FilPersonsName" :key="person.id">
+                    {{person.name}}-{{person.class}}-{{person.gender}}
+                </li> 
+            </ul>
+            <hr>
+        </div>
+<!-- Search with first name, only show same first Letter, not case sensitive -->       
+      <div>
+        <h5>Search with first name, only show same first Letter, not case sensitive</h5>
+        <input type="text" placeholder="pleace input the name, not case sensitive" v-model="keywordCase">
+        <ul>
+            <li v-for="person in FilPersonsNameInit" :key="person.id">
             {{person.name}}-{{person.class}}-{{person.gender}}
-        </li> 
-      </ul>
-      <hr>
+            </li> 
+        </ul>
+        <hr>
+      </div>
+<!-- Search with first name or last name or nickname, not case sensitive -->
       
-      <h5>Search with first name, only show same first Letter, not case sensitive</h5>
-      <input type="text" placeholder="pleace input the name, not case sensitive" v-model="keywordCase">
-    <ul>
-      <li v-for="person in FilPersonsNameInit" :key="person.id">
-          {{person.name}}-{{person.class}}-{{person.gender}}
-      </li> 
-    </ul>
-    <hr>
-
-        <h5>Search with class</h5>
-      
-        <input type="text" placeholder="pleace input the class" v-model="classname">
-      <ul>
-        <li v-for="person in FilPersonsClass" :key="person.id">
-            {{person.class}}:{{person.name}}-{{person.gender}}
-        </li> 
-      </ul>
-      <hr>
-      
-      <h5>Search with gender</h5>
-        <input type="text" placeholder="pleace input the gender" v-model="genderinfo">
-      <ul>
-        <li v-for="person in FilPersonsGender" :key="person.id">
-            {{person.gender}}: {{person.name}}-{{person.class}}
-        </li> 
-      </ul>
+      <div>
+        <h5>Search with first name or last name or nickname, not case sensitive</h5>
+        <input type="text" placeholder="firstname, nickname or lastname, not case sensitive" v-model="Searchword">
+        <ul>
+            <li v-for="student in FilStudentsAllName" :key="student.id">
+            {{student.firstname}}-{{student.lastname}}-{{student.nickname}}-{{student.class}}-{{student.gender}}
+            </li> 
+        </ul>
+        <hr>
+      </div>   
+<!-- Search with class -->
+        <div>
+            <h5>Search with class</h5>
+            <input type="text" placeholder="pleace input the class" v-model="classname">
+            <ul>
+                <li v-for="person in FilPersonsClass" :key="person.id">
+                {{person.class}}:{{person.name}}-{{person.gender}}
+                </li> 
+            </ul>
+            <hr>
+        </div>    
+<!-- Search with gender -->
+        <div>
+            <h5>Search with gender</h5>
+            <input type="text" placeholder="input the gender" v-model="genderinfo">
+            <ul>
+                <li v-for="person in FilPersonsGender" :key="person.id">
+                    {{person.gender}}: {{person.name}}-{{person.class}}
+                </li> 
+            </ul>
+        </div>    
     </div>  
-
-    
-
 </body>
 <!-- 设置为 false 以阻止 vue 在启动时生成生产提示。 -->
 <script type="text/javascript">
@@ -76,12 +91,24 @@
                 {id:'006',name:'John Lee', gender:'boy',class:'2'},
 
             ],
+//add students-mockdata, in order to search with nickname and lastname
+            students:[
+                {id:'001',nickname:' ', lastname:'Benth',firstname:'Lily', gender:'girl', class:'4' },
+                {id:'002',nickname:'Alex', lastname:'Lee',firstname:'Alexia', gender:'girl',class:'4'},
+                {id:'003',nickname:' ', lastname:'Bilett',firstname:'Tom', gender:'boy',class:'1'},
+                {id:'004',nickname:'Chris', lastname:'Meylor',firstname:'Christian', gender:'boy',class:'1'},
+                {id:'005',nickname:'Mei', lastname:'Meylor',firstname:'Christian', gender:'boy',class:'2'},
+                {id:'006',nickname:'John', lastname:'Lee',firstname:'John', gender:'boy',class:'2'},
+            ],
+
             keyword:'',
+            Searchword:'',
             keywordCase:'',
             classname:'',
             genderinfo:''
         },
         computed:{
+//Search with Name,keyword inside the name:FilPersonsName             
             FilPersonsName(){
                 return this.persons.filter(
                     (person)=>{
@@ -89,6 +116,7 @@
 
                 })
             },
+//Search with first name, only show same first Letter, not case sensitive:FilPersonsNameInit
             FilPersonsNameInit(){
                 return this.persons.filter(
                     (person)=>{
@@ -96,18 +124,30 @@
 
                 })
             },
+//Search with first name or last name or nickname, not case sensitive:FilStudentsAllName           
+            FilStudentsAllName(){
+                return this.students.filter(
+                    (student)=>{
+                        if (student.firstname.toLowerCase().indexOf(this.Searchword.toLowerCase()) === 0)
+                        return student.firstname.toLowerCase().indexOf(this.Searchword.toLowerCase()) === 0
+                        else if (student.lastname.toLowerCase().indexOf(this.Searchword.toLowerCase()) === 0)
+                        return student.lastname.toLowerCase().indexOf(this.Searchword.toLowerCase()) === 0
+                        else if (student.nickname.toLowerCase().indexOf(this.Searchword.toLowerCase()) === 0)
+                        return student.nickname.toLowerCase().indexOf(this.Searchword.toLowerCase()) === 0
+                })
+            },
+//Search with class:FilPersonsClass
             FilPersonsClass(){
                 return this.persons.filter(
                     (person)=>{
                         return person.class.indexOf(this.classname)!== -1
-
                 })
             },
+//Search with gender:FilPersonsGender
             FilPersonsGender(){
                 return this.persons.filter(
                     (person)=>{
                         return person.gender.indexOf(this.genderinfo)!== -1
-
                 })
             }
         }
