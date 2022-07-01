@@ -6,6 +6,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="img/favicon.ico">
     <title>search gender</title>  
+    <style>
+/* add CSS */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+#searchbox {
+    margin: auto;
+    width: 60%;
+    border: 1px solid #73AD21;
+}
+#myInput {
+  background-image: url('https://www.w3schools.com/css/searchicon.png');
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  width: 90%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin: 12px 10px;
+  border-radius: 20px;
+ 
+}
+
+#myUL {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+#search-results {
+    padding:  0 0 12px px ;
+}
+#myUL li a {
+  border: 1px solid #ddd;
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: block
+}
+
+#myUL li a:hover:not(.header) {
+  background-color: #eee;
+}        
+    </style>
     <!-- 引入Vue -->
     <script type="text/javascript" src="js/vue.js"></script> 
 </head>
@@ -13,15 +61,17 @@
 <body>
 <!-- prepare a div -->
     <div id="root">
-        <h2>Search bar & filter</h2> 
+        <h1>Search bar & filter</h1> 
         <img src="img/searchname.png" alt="demo-img-search" width="400" height="400">
 <!-- Search with Name,keyword inside the name -->        
-        <div>
-            <h5>Search with Name</h5>
-            <input type="text" placeholder="pleace input the name" v-model="keyword">
-            <ul>
-                <li v-for="person in FilPersonsName" :key="person.id">
-                    {{person.name}}-{{person.class}}-{{person.gender}}
+        <div id="searchbox">
+            
+            <input type="text" placeholder="pleace input the name" id="myInput" v-model="keyword" title="Type in a name">
+            <ul id="myUL">
+                <div id="search-results">Search results:</div>
+                
+                <li v-for="person in FilPersonsName" :key="person.id"> 
+                    <a href="#">{{person.name}}-{{person.class}}-{{person.gender}}</a>
                 </li> 
             </ul>
             <hr>
@@ -76,7 +126,6 @@
 <script type="text/javascript">
     Vue.config.productionTip=false 
 /* 创建Vue实例 */     
-
 
 // with computed
     new Vue({
