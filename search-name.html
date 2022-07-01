@@ -25,6 +25,16 @@
         </li> 
       </ul>
       <hr>
+      
+      <h5>Search with first name, only show same first Letter, not case sensitive</h5>
+      <input type="text" placeholder="pleace input the name, not case sensitive" v-model="keywordCase">
+    <ul>
+      <li v-for="person in FilPersonsNameInit" :key="person.id">
+          {{person.name}}-{{person.class}}-{{person.gender}}
+      </li> 
+    </ul>
+    <hr>
+
         <h5>Search with class</h5>
       
         <input type="text" placeholder="pleace input the class" v-model="classname">
@@ -43,6 +53,8 @@
         </li> 
       </ul>
     </div>  
+
+    
 
 </body>
 <!-- 设置为 false 以阻止 vue 在启动时生成生产提示。 -->
@@ -65,6 +77,7 @@
 
             ],
             keyword:'',
+            keywordCase:'',
             classname:'',
             genderinfo:''
         },
@@ -72,7 +85,14 @@
             FilPersonsName(){
                 return this.persons.filter(
                     (person)=>{
-                        return person.name.indexOf(this.keyword)!== -1
+                        return person.name.indexOf(this.keyword) !== -1
+
+                })
+            },
+            FilPersonsNameInit(){
+                return this.persons.filter(
+                    (person)=>{
+                        return person.name.toLowerCase().indexOf(this.keywordCase.toLowerCase()) === 0
 
                 })
             },
