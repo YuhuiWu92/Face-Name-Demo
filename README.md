@@ -22,7 +22,8 @@ I want to find out their name.
 Miro,
 Trello, 
 X-Mind,
-balsamiq
+balsamiq,
+Figma
 ## Technical stack
 HTML, CSS, Javascript
 Vue
